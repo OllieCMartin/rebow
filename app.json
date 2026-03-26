@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Rebow",
+    "slug": "rebow",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#7EAEC4"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rebow.app",
+      "infoPlist": {
+        "NSMotionUsageDescription": "Rebow needs accelerometer access to track your exercise movements."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#7EAEC4"
+      },
+      "package": "com.rebow.app"
+    },
+    "plugins": [
+      "expo-sensors"
+    ]
+  }
+}
