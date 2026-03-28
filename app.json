@@ -26,8 +26,20 @@
       },
       "package": "com.rebow.app"
     },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/icon.png",
+      "name": "Rebow",
+      "shortName": "Rebow",
+      "description": "Track your exercises with motion sensing",
+      "themeColor": "#7EAEC4",
+      "backgroundColor": "#7EAEC4",
+      "lang": "en"
+    },
     "plugins": [
-      "expo-sensors"
+      "expo-sensors",
+      "expo-asset"
     ]
   }
 }
