@@ -455,7 +455,7 @@ function SettingsScreen({ settings, onChange, onBack, onHelp }: {
               <button key={c} onClick={() => onChange({ ...settings, condition: c })} style={{
                 background: selected ? BLUE : 'transparent',
                 color: selected ? '#FFF' : INK,
-                border: `1.5px solid ${selected ? BLUE : BLUE}`,
+                border: `1.5px solid ${BLUE}`,
                 borderRadius: 12, padding: '12px 14px', height: 56,
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 cursor: 'pointer', fontFamily: FONT,
@@ -746,9 +746,9 @@ const backBtn: React.CSSProperties = {
 
 const configChip: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', gap: 6,
-  height: 32, padding: '0 12px',
+  height: 44, padding: '0 14px',
   borderRadius: 999, border: `1px solid ${LINE}`, background: '#FFF',
-  color: INK, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+  color: INK, fontSize: 13, fontWeight: 600, cursor: 'pointer',
   fontFamily: FONT,
 };
 
@@ -756,4 +756,4 @@ const configChip: React.CSSProperties = {
 // without redoing the layout chrome. Tree-shaken out of prod bundles
 // when callers don't import them.
 export { HomeScreen, SettingsScreen, LogbookScreen, OnboardingScreen };
-export { BRAND, BLUE, ACCENT, WARN, CREAM, INK, MUTE, LINE };
+export { BRAND, BLUE, ACCENT, WARN, CREAM, INK, MUTE, LINE, FONT };

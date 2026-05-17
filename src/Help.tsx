@@ -3,14 +3,7 @@
 // Illustrations are exported so Onboarding can reuse them without duplication.
 
 import { type ReactNode } from 'react';
-
-// Rebow palette — Clinic direction. Keep these in sync with src/App.tsx.
-const BLUE = '#0F4E72';
-const CREAM = '#F4EFE0';
-const INK = '#13181C';
-const MUTE = '#6F7780';
-const LINE = '#E2DCC9';
-const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+import { BLUE, CREAM, INK, MUTE, LINE, WARN, FONT } from './App';
 
 type Condition = 'tennis' | 'golfers';
 
@@ -91,7 +84,7 @@ function Card({ children, variant }: { children: ReactNode; variant?: 'warn' }) 
   return (
     <div style={{
       background: '#FFF',
-      border: `1px solid ${variant === 'warn' ? '#E8C9B8' : LINE}`,
+      border: `1px solid ${variant === 'warn' ? WARN + '55' : LINE}`,
       borderRadius: 14,
       padding: 16,
       display: 'flex',
@@ -107,7 +100,7 @@ function Kicker({ children, tone }: { children: ReactNode; tone?: 'warn' }) {
   return (
     <div style={{
       fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase',
-      color: tone === 'warn' ? '#B2533A' : BLUE,
+      color: tone === 'warn' ? WARN : BLUE,
     }}>
       {children}
     </div>
