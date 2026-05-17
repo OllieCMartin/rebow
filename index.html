@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1C7AAF" />
+    <title>Rebow — Session Test Harness</title>
+    <style>
+      html, body, #root { margin: 0; padding: 0; height: 100%; background: #F5F0E1; }
+      body { -webkit-font-smoothing: antialiased; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="err" style="display:none;position:fixed;inset:0;background:#fff;color:red;padding:20px;font:13px monospace;white-space:pre-wrap;word-break:break-word;z-index:99999"></div>
+    <script>
+      window.onerror = function(msg, src, line, col, err) {
+        var el = document.getElementById('err');
+        el.style.display = 'block';
+        el.textContent = 'onerror: ' + msg + '\n' + src + ':' + line + '\n\n' + (err && err.stack || '');
+      };
+      window.addEventListener('unhandledrejection', function(e) {
+        var el = document.getElementById('err');
+        el.style.display = 'block';
+        el.textContent = 'unhandledrejection:\n' + (e.reason && (e.reason.stack || e.reason.message || e.reason));
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
