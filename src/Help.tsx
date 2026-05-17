@@ -3,7 +3,7 @@
 // Illustrations are exported so Onboarding can reuse them without duplication.
 
 import { type ReactNode } from 'react';
-import { BLUE, CREAM, INK, MUTE, LINE, WARN, FONT } from './App';
+import { BLUE, CREAM, INK, MUTE, LINE, WARN, FONT, backBtn } from './App';
 
 type Condition = 'tennis' | 'golfers';
 
@@ -268,12 +268,6 @@ const scroller: React.CSSProperties = {
   flex: 1, overflowY: 'auto',
   padding: '4px 20px 32px',
   display: 'flex', flexDirection: 'column', gap: 14,
-};
-
-const backBtn: React.CSSProperties = {
-  width: 44, height: 44, borderRadius: 999, border: `1.5px solid ${BLUE}`,
-  background: 'transparent', color: BLUE, fontSize: 20, cursor: 'pointer',
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
 };
 
 const ilStyle: React.CSSProperties = {

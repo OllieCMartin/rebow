@@ -28,7 +28,7 @@ const ACCENT = '#5C8C6C';
 const WARN = '#B2533A';
 const CREAM = '#F4EFE0';
 const INK = '#13181C';
-const MUTE = '#6F7780';
+const MUTE = '#5A6168';
 const LINE = '#E2DCC9';
 const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
@@ -113,7 +113,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
 
 export default function App() {
   const [settings, setSettings] = useState<Settings>(loadSettings);
-  const [view, setView] = useState<View>(() => (loadSettings().onboarded ? 'home' : 'onboarding'));
+  const [view, setView] = useState<View>(() => (settings.onboarded ? 'home' : 'onboarding'));
   const [lastResult, setLastResult] = useState<SessionResult | null>(null);
 
   useEffect(() => { saveSettings(settings); }, [settings]);
@@ -196,7 +196,7 @@ function HomeScreen({ settings, onStart, onSettings, onLogbook, onHelp, lastResu
   lastResult: SessionResult | null;
 }) {
   const meta = CONDITION_META[settings.condition];
-  const nextSlot = useNextSlot();
+  const nextSlot = useNextSlot(lastResult);
 
   return (
     <Page>
@@ -251,16 +251,21 @@ function HomeScreen({ settings, onStart, onSettings, onLogbook, onHelp, lastResu
   );
 }
 
-function useNextSlot(): 'AM' | 'PM' | 'done' {
+function useNextSlot(invalidate: unknown): 'AM' | 'PM' | 'done' {
   return useMemo(() => {
     const today = new Date();
     const same = (a: Date, b: Date) =>
       a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
     const todays = loadLog().filter((e) => same(new Date(e.completedAt), today));
-    if (todays.length === 0) return 'AM';
-    if (todays.length === 1) return 'PM';
-    return 'done';
-  }, []);
+    if (todays.length >= 2) return 'done';
+    // If one is logged, the next is whichever half-day hasn't been done yet.
+    if (todays.length === 1) {
+      const loggedHour = new Date(todays[0].completedAt).getHours();
+      return loggedHour < 12 ? 'PM' : 'AM';
+    }
+    // Nothing logged today: suggest by current clock.
+    return today.getHours() < 12 ? 'AM' : 'PM';
+  }, [invalidate]);
 }
 
 function Dot({ color }: { color: string }) {
@@ -647,12 +652,12 @@ function computeStreakDays(entries: LogEntry[]): number {
   }));
   let streak = 0;
   const cursor = new Date();
-  while (true) {
+  const MAX_STREAK = 3650; // 10 years — defensive cap against accidental infinite loops
+  while (streak < MAX_STREAK) {
     const key = `${cursor.getFullYear()}-${cursor.getMonth()}-${cursor.getDate()}`;
-    if (days.has(key)) {
-      streak++;
-      cursor.setDate(cursor.getDate() - 1);
-    } else break;
+    if (!days.has(key)) break;
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
   }
   return streak;
 }
@@ -738,7 +743,7 @@ const secondaryBtn: React.CSSProperties = {
   fontSize: 16, fontWeight: 700, border: `1.5px solid ${BLUE}`, cursor: 'pointer', fontFamily: FONT,
 };
 
-const backBtn: React.CSSProperties = {
+export const backBtn: React.CSSProperties = {
   width: 44, height: 44, borderRadius: 999, border: `1.5px solid ${BLUE}`,
   background: 'transparent', color: BLUE, fontSize: 20, cursor: 'pointer',
   display: 'flex', alignItems: 'center', justifyContent: 'center',
