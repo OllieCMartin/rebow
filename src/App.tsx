@@ -10,27 +10,13 @@
 import { useEffect, useMemo, useState, Component, type ReactNode } from 'react';
 import SessionScreen, { type SessionResult } from './SessionScreen';
 import HelpScreen, { ForearmAnatomy, MountIllustration, RepStoryboard } from './Help';
+import { BRAND, BLUE, ACCENT, WARN, CREAM, INK, MUTE, LINE, FONT, backBtn } from './tokens';
 
 // ─── Types & constants ──────────────────────────────────────────────────────
 
 type Condition = 'tennis' | 'golfers';
 type Hand = 'L' | 'R';
 type View = 'home' | 'session' | 'settings' | 'logbook' | 'help' | 'onboarding';
-
-// Rebow palette — "Clinic" direction. See SessionScreen.redesign-spec.md.
-//   BRAND  Mondah blue — reserved for the wordmark / parent-brand surfaces.
-//   BLUE   Interaction blue — buttons, active pills, focus rings, gauge fill.
-//   ACCENT Sage — live-state color: gauge needle, streak, success moments.
-//   WARN   Terracotta — off-pace tint, error states.
-const BRAND = '#1C7AAF';
-const BLUE = '#0F4E72';
-const ACCENT = '#5C8C6C';
-const WARN = '#B2533A';
-const CREAM = '#F4EFE0';
-const INK = '#13181C';
-const MUTE = '#5A6168';
-const LINE = '#E2DCC9';
-const FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 const STORAGE_KEY = 'rebow.settings.v1';
 const LOG_KEY = 'rebow.log.v1';
@@ -743,11 +729,6 @@ const secondaryBtn: React.CSSProperties = {
   fontSize: 16, fontWeight: 700, border: `1.5px solid ${BLUE}`, cursor: 'pointer', fontFamily: FONT,
 };
 
-export const backBtn: React.CSSProperties = {
-  width: 44, height: 44, borderRadius: 999, border: `1.5px solid ${BLUE}`,
-  background: 'transparent', color: BLUE, fontSize: 20, cursor: 'pointer',
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
-};
 
 const configChip: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', gap: 6,

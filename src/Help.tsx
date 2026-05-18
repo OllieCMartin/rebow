@@ -3,7 +3,7 @@
 // Illustrations are exported so Onboarding can reuse them without duplication.
 
 import { type ReactNode } from 'react';
-import { BLUE, CREAM, INK, MUTE, LINE, WARN, FONT, backBtn } from './App';
+import { BLUE, CREAM, INK, MUTE, LINE, WARN, FONT, backBtn } from './tokens';
 
 type Condition = 'tennis' | 'golfers';
 
